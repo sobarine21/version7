@@ -16,24 +16,19 @@ if st.button("Generate Insights"):
         try:
             payload = {"email_content": email_content, "scenario": scenario}
             response = requests.post(API_URL, json=payload)
-            response.raise_for_status()  # Raise HTTPError for bad responses (4xx or 5xx)
             insights = response.json()
 
             if "error" in insights:
                 st.error(f"API Error: {insights['error']}")
             else:
                 st.subheader("Insights:")
-                st.write(f"**Summary:** {insights.get('summary', 'N/A')}")
-                st.write(f"**Response:** {insights.get('response', 'N/A')}")
-                st.write(f"**Highlights:** {insights.get('highlights', 'N/A')}")
-                st.write(f"**Tasks:** {insights.get('tasks', 'N/A')}")
-                st.write(f"**Sentiment:** {insights.get('sentiment', 'N/A')}")
-                st.write(f"**Clarity Score:** {insights.get('clarity_score', 'N/A')}")
-                st.write(f"**Scenario Response:** {insights.get('scenario_response', 'N/A')}")
+                st.write(f"**Summary:** {insights['summary']}")
+                st.write(f"**Response:** {insights['response']}")
+                st.write(f"**Highlights:** {insights['highlights']}")
+                st.write(f"**Tasks:** {insights['tasks']}")
+                st.write(f"**Sentiment:** {insights['sentiment']}")
+                st.write(f"**Clarity Score:** {insights['clarity_score']}")
+                st.write(f"**Scenario Response:** {insights['scenario_response']}")
 
-        except requests.exceptions.RequestException as e:
-            st.error(f"Error connecting to API: {e}")
-        except json.JSONDecodeError:
-            st.error("Invalid JSON response from API.")
         except Exception as e:
-            st.error(f"An unexpected error occurred: {e}")
+            st.error(f"An error occurred: {e}")
