@@ -31,7 +31,6 @@ if st.button("Generate Insights"):
 
             if response.status_code == 401:
                 st.error("Unauthorized access. Please check your API key.")
-                #No return statement is needed here. st.stop() will stop execution.
                 st.stop()
 
             insights = response.json()
@@ -46,7 +45,9 @@ if st.button("Generate Insights"):
                 st.write(f"**Tasks:** {insights['tasks']}")
                 st.write(f"**Sentiment:** {insights['sentiment']}")
                 st.write(f"**Clarity Score:** {insights['clarity_score']}")
-                st.write(f"**Scenario Response:** {insights['scenario_response']}")
+                st.write(f"**Scenario Response 1:** {insights['scenario_response_1']}")
+                st.write(f"**Scenario Response 2:** {insights['scenario_response_2']}")
+                st.write(f"**Scenario Response 3:** {insights['scenario_response_3']}")
 
         except requests.exceptions.RequestException as e:
             st.error(f"Error connecting to API: {e}")
