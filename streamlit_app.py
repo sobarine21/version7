@@ -31,7 +31,8 @@ if st.button("Generate Insights"):
 
             if response.status_code == 401:
                 st.error("Unauthorized access. Please check your API key.")
-                return
+                #No return statement is needed here. st.stop() will stop execution.
+                st.stop()
 
             insights = response.json()
 
